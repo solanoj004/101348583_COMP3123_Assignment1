@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Employee Schema defined according to Assignment document
 const employeeSchema = new mongoose.Schema({
   first_name: { 
     type: String, 
@@ -30,6 +31,8 @@ const employeeSchema = new mongoose.Schema({
     type: String, 
     required: true 
   }
+// Adds created/updated time
 }, { timestamps: true });
 
+// Create and export Employee model
 module.exports = mongoose.model('Employee', employeeSchema);

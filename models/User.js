@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// User Schema defined according to Assignment document
 const userSchema = new mongoose.Schema({
   username: { 
     type: String, 
@@ -15,6 +16,8 @@ const userSchema = new mongoose.Schema({
     type: String, 
     required: true 
   }
-}, { timestamps: true });
+  // Adds created/updated time
+}, { timestamps: true }); 
 
+// Create and export User model
 module.exports = mongoose.model('User', userSchema);

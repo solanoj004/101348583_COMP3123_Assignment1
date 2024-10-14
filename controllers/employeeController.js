@@ -1,5 +1,6 @@
 const Employee = require('../models/Employee');
 
+// Get all employees
 exports.getAllEmployees = async (req, res) => {
   try {
     const employees = await Employee.find();
@@ -9,10 +10,13 @@ exports.getAllEmployees = async (req, res) => {
   }
 };
 
+// Create a new employee
 exports.createEmployee = async (req, res) => {
   try {
     const newEmployee = new Employee(req.body);
     await newEmployee.save();
+
+    // 201 Status - Success
     res.status(201).json({
       message: 'Employee created successfully.',
       employee_id: newEmployee._id
@@ -22,6 +26,7 @@ exports.createEmployee = async (req, res) => {
   }
 };
 
+// Get Employee by ID
 exports.getEmployeeById = async (req, res) => {
   try {
     const employee = await Employee.findById(req.params.eid);
@@ -34,6 +39,7 @@ exports.getEmployeeById = async (req, res) => {
   }
 };
 
+// Update an Employee by ID
 exports.updateEmployee = async (req, res) => {
   try {
     const updatedEmployee = await Employee.findByIdAndUpdate(req.params.eid, req.body, { new: true });
@@ -46,6 +52,7 @@ exports.updateEmployee = async (req, res) => {
   }
 };
 
+// Delete an Employee by ID
 exports.deleteEmployee = async (req, res) => {
   try {
     const deletedEmployee = await Employee.findByIdAndDelete(req.query.eid);
