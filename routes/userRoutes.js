@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const { signup, login } = require('../controllers/userController');
+const { userValidationRules } = require('../validators/validationRules');
+const validate = require('../middleware/validate');
 
 // POST /api/v1/user/signup
-// Creating a new user
-router.post('/signup', signup);
+// Create a new user account
+router.post('/signup', userValidationRules.signup, validate, signup);
 
 // POST /api/v1/user/login
-// Authenticate and log in a user
-router.post('/login', login);
+// Logs user in
+router.post('/login', userValidationRules.login, validate, login);
 
 module.exports = router;

@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { employeeValidationRules } = require('../validators/validationRules');
+const validate = require('../middleware/validate');
 const {
   getAllEmployees,
   createEmployee,
@@ -9,23 +11,23 @@ const {
 } = require('../controllers/employeeController');
 
 // GET /api/v1/emp/employees
-// Retrieve all employee
+// Retrieve all employees
 router.get('/employees', getAllEmployees);
 
 // POST /api/v1/emp/employees
 // Create a new employee
-router.post('/employees', createEmployee);
+router.post('/employees', employeeValidationRules.createEmployee, validate, createEmployee);
 
 // GET /api/v1/emp/employees/:eid
-// Retrieve a specific employee by ID
-router.get('/employees/:eid', getEmployeeById);
+// Retrieve employee by ID
+router.get('/employees/:eid', employeeValidationRules.getEmployeeById, validate, getEmployeeById);
 
 // PUT /api/v1/emp/employees/:eid
-// Update a specific employee by ID
-router.put('/employees/:eid', updateEmployee);
+// Update employee info by ID
+router.put('/employees/:eid', employeeValidationRules.updateEmployee, validate, updateEmployee);
 
 // DELETE /api/v1/emp/employees?eid=xxx
-// Delete a specific employee by ID (passed as a query parameter)
-router.delete('/employees', deleteEmployee);
+// Delete employee by ID using query parameter
+router.delete('/employees', employeeValidationRules.deleteEmployee, validate, deleteEmployee);
 
 module.exports = router;
