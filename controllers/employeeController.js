@@ -15,7 +15,7 @@ exports.createEmployee = async (req, res) => {
     await newEmployee.save();
     res.status(201).json({
       message: 'Employee created successfully.',
-      employee_id: newEmployee._id,
+      employee_id: newEmployee._id
     });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
@@ -52,7 +52,7 @@ exports.deleteEmployee = async (req, res) => {
     if (!deletedEmployee) {
       return res.status(404).json({ status: false, message: 'Employee not found' });
     }
-    res.status(204).json({ message: 'Employee deleted successfully.' });
+    res.status(204).send();
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }

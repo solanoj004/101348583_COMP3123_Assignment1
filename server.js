@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const { connectDB } = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const employeeRoutes = require('./routes/employeeRoutes');
-const { connectDB } = require('./config/db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
