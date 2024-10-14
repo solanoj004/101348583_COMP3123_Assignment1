@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { connectDB } = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const employeeRoutes = require('./routes/employeeRoutes');
 
@@ -11,7 +10,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Connect to MongoDB
-connectDB();
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB', err));
 
 // Routes
 app.use('/api/v1/user', userRoutes);
