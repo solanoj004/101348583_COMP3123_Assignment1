@@ -48,9 +48,11 @@ exports.login = async (req, res) => {
       return res.status(400).json({ status: false, message: 'Invalid email or password' });
     }
 
+    // TODO: Generate JWT token if implementing JWT authentication
+
     res.status(200).json({
       message: 'Login successful.',
-      
+      // jwt_token: 'your_jwt_token_here' // Uncomment if implementing JWT
     });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
